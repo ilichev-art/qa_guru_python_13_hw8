@@ -69,6 +69,16 @@ class TestCart:
 
         assert cart.get_total_price() == 1000
 
+    def test_remove_product(self, product, cart):
+        cart.add_product(product, 2)
+        cart.remove_product(product, 1)
+
+        assert cart.products[product] == 1
+
+        cart.remove_product(product)
+
+        assert product not in cart.products
+
     def test_buy(self, cart, product):
         cart.add_product(product, 1001)
         with pytest.raises(ValueError):
